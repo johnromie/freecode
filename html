@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timestamp Microservice</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Timestamp Microservice</h1>
+        <form id="timestamp-form">
+            <input type="text" id="date-input" class="form-control" placeholder="Enter a date or timestamp" required>
+            <button type="submit" class="btn btn-primary mt-2">Get Timestamp</button>
+        </form>
+        <div id="result" class="mt-3"></div>
+    </div>
+
+    <script>
+        document.getElementById('timestamp-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const dateInput = document.getElementById('date-input').value;
+            const response = await fetch(`/api/timestamp/${dateInput}`);
+            const data = await response.json();
+            document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+        });
+    </script>
+</body>
+</html>
